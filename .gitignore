@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output (GitHub Actions builds it on every push)
+dist/
+dev-dist/
+*.tsbuildinfo
+.vite/
+
+# Tests
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment and local overrides
+.env
+.env.*
+*.local
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Claude Code local config (dev server launch settings)
+.claude/
