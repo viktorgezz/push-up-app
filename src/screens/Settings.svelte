@@ -122,7 +122,10 @@
         </div>
       </div>
       <label class="item">
-        <span class="label">Sounds</span>
+        <span>
+          <span class="label">Sounds</span>
+          <span class="muted small block">Beeps play over your music and are muted in Silent mode.</span>
+        </span>
         <input
           type="checkbox"
           class="switch"

@@ -9,9 +9,10 @@ interface AudioSessionNavigator {
 }
 
 export function unlockAudio() {
-  // 'playback' lets the beeps play even when the ring/silent switch is on.
+  // 'ambient' mixes the beeps into music from other apps (Spotify etc.); 'playback' would pause it.
+  // The price: like game sounds, the beeps are muted in Silent mode.
   const nav = navigator as Navigator & AudioSessionNavigator;
-  if (nav.audioSession) nav.audioSession.type = 'playback';
+  if (nav.audioSession) nav.audioSession.type = 'ambient';
 
   if (!ctx) {
     try {

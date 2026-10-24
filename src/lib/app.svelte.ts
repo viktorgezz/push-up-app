@@ -105,15 +105,20 @@ class AppStore {
     saveSession(session);
   }
 
+  /** With Sounds off the app never opens an audio session, so it can't touch music playing in another app. */
+  private unlockSound() {
+    if (this.settings.soundOn) unlockAudio();
+  }
+
   async startWorkout() {
     if (!this.program) return;
-    unlockAudio();
+    this.unlockSound();
     this.setSession(startSession(this.program, this.settings, Date.now()));
     this.screen = 'workout';
   }
 
   resumeWorkout() {
-    unlockAudio();
+    this.unlockSound();
     this.screen = 'workout';
   }
 
@@ -122,7 +127,7 @@ class AppStore {
 
   async done() {
     if (!this.session || this.committing) return;
-    unlockAudio();
+    this.unlockSound();
     if (this.settings.soundOn) playDone();
     const next = completeSet(this.session, Date.now());
     if (isComplete(next)) await this.finishTraining(next);
@@ -130,17 +135,17 @@ class AppStore {
   }
 
   undo() {
-    unlockAudio();
+    this.unlockSound();
     if (this.session) this.setSession(undoSet(this.session));
   }
 
   adjustRest(deltaSec: number) {
-    unlockAudio();
+    this.unlockSound();
     if (this.session) this.setSession(adjustRestFn(this.session, deltaSec, Date.now()));
   }
 
   skipRest() {
-    unlockAudio();
+    this.unlockSound();
     this.endRest();
   }
 
